@@ -27,50 +27,66 @@
       overflow: hidden; /* Запрет скролла на ПК */
     }
 
-    /* Главный контейнер, делит экран на две части */
+    /* Сетка: 2 колонки */
     .container {
       width: 100%;
-      max-width: 1100px;
-      height: 100%;
-      display: flex;
-      padding: 2rem 4rem;
+      max-width: 900px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 4rem;
+      padding: 2rem;
     }
 
-    /* ЛЕВАЯ ЧАСТЬ */
-    .left-col {
-      flex: 1;
+    /* Общие стили для колонок */
+    .col {
       display: flex;
       flex-direction: column;
-      justify-content: center;
       gap: 1.5rem;
-      max-width: 400px;
+    }
+
+    /* Заголовки секций (Обо мне, Музыка, Ссылки) */
+    h2 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* --- ЛЕВАЯ КОЛОНКА: ОБО МНЕ --- */
+    .profile-card {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
     }
     
     .avatar {
-      width: 140px;
-      height: 140px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
       object-fit: cover;
       border: 1px solid var(--border);
+      flex-shrink: 0;
     }
 
-    .profile-info h1 {
-      font-size: 2rem;
+    .profile-card h1 {
+      font-size: 1.8rem;
       font-weight: 700;
       letter-spacing: -.02em;
     }
     .subtitle {
       color: var(--muted);
-      font-size: 1rem;
+      font-size: 0.9rem;
       margin-top: 0.2rem;
-      margin-bottom: 1rem;
     }
 
     .about-row {
       display: flex;
       justify-content: space-between;
-      padding: .4rem 0;
+      padding: .5rem 0;
       border-bottom: 1px solid var(--border);
       font-size: .9rem;
     }
@@ -78,12 +94,42 @@
     .about-row span:first-child { color: var(--muted); }
     .about-row span:last-child { font-weight: 500; text-align: right; }
 
-    /* Ссылки */
+    /* --- ПРАВАЯ КОЛОНКА: МУЗЫКА --- */
+    .music-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.2rem;
+    }
+    .music-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .music-icon {
+      width: 40px; height: 40px;
+      background: #ffffff;
+      color: #000;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .music-title { font-weight: 600; font-size: 1rem; }
+    .music-desc { color: var(--muted); font-size: .8rem; margin-top: 0.1rem; }
+    
+    audio {
+      width: 100%;
+      height: 36px;
+      outline: none;
+      filter: invert(100%) hue-rotate(180deg) brightness(1.5);
+    }
+
+    /* --- ССЫЛКИ --- */
     .links {
       display: flex;
       flex-direction: column;
-      gap: 0.6rem;
-      margin-top: 0.5rem;
+      gap: 0.5rem;
     }
     .link {
       display: flex;
@@ -91,8 +137,8 @@
       gap: 1rem;
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 0.8rem 1rem;
+      border-radius: 10px;
+      padding: 0.7rem 1rem;
       text-decoration: none;
       color: var(--text);
       transition: all .2s ease;
@@ -103,73 +149,26 @@
       transform: translateX(4px);
     }
     .link-icon {
-      width: 32px; height: 32px;
-      border-radius: 8px;
+      width: 28px; height: 28px;
+      border-radius: 6px;
       background: rgba(255, 255, 255, 0.05);
       display: flex; align-items: center; justify-content: center;
-      font-size: 1rem;
+      font-size: 0.9rem;
       flex-shrink: 0;
     }
     .link-body { flex: 1; min-width: 0; }
-    .link-title { font-weight: 600; font-size: 0.9rem; }
+    .link-title { font-weight: 600; font-size: 0.85rem; }
     .link-desc { color: var(--muted); font-size: .75rem; margin-top: 0.1rem; }
-    .link-arrow { color: var(--muted); font-size: 1.2rem; }
+    .link-arrow { color: var(--muted); font-size: 1rem; }
 
-    /* ПРАВАЯ ЧАСТЬ (Музыка) */
-    .right-col {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .music-card {
-      width: 100%;
-      max-width: 450px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.5rem;
-    }
-    .music-info {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
-    .music-icon {
-      width: 48px; height: 48px;
-      background: #ffffff;
-      color: #000;
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem;
-      flex-shrink: 0;
-    }
-    .music-title { font-weight: 600; font-size: 1.1rem; }
-    .music-desc { color: var(--muted); font-size: .85rem; margin-top: 0.2rem; }
-    
-    /* Черный плеер */
-    audio {
-      width: 100%;
-      height: 40px;
-      outline: none;
-      border-radius: 8px;
-      /* Инвертируем стандартный белый плеер в черный */
-      filter: invert(100%) hue-rotate(180deg) brightness(1.5);
-    }
-
-    /* Адаптивность для мобилок */
-    @media (max-width: 900px) {
+    /* Адаптив под мобилки */
+    @media (max-width: 768px) {
       body { overflow: auto; height: auto; }
       .container {
-        flex-direction: column;
-        padding: 2rem 1.5rem;
-        gap: 3rem;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 2rem 1rem;
       }
-      .left-col { max-width: 100%; }
-      .right-col { padding-bottom: 2rem; }
-      .avatar { width: 120px; height: 120px; }
     }
   </style>
 </head>
@@ -177,13 +176,16 @@
   <div class="container">
     
     <!-- ЛЕВАЯ КОЛОНКА -->
-    <div class="left-col">
-      <!-- Если аватарка в формате png, поменяй на avatar.png -->
-      <img class="avatar" src="avatar.jpg" alt="Shade">
-      
-      <div class="profile-info">
-        <h1>Рома</h1>
-        <p class="subtitle">Пользователь StaticGram · Shade</p>
+    <div class="col">
+      <div>
+        <h2>Обо мне</h2>
+        <div class="profile-card">
+          <img class="avatar" src="avatar.jpg" alt="Shade">
+          <div>
+            <h1>Рома</h1>
+            <p class="subtitle">Пользователь StaticGram</p>
+          </div>
+        </div>
         
         <div class="about-row"><span>Имя</span><span>Рома</span></div>
         <div class="about-row"><span>Возраст</span><span>??</span></div>
@@ -191,60 +193,70 @@
         <div class="about-row"><span>В Telegram</span><span>! wdie</span></div>
         <div class="about-row"><span>В StaticGram</span><span>Shade</span></div>
       </div>
-
-      <div class="links">
-        <a class="link" href="https://t.me/gsgojo" target="_blank" rel="noopener">
-          <div class="link-icon">✈️</div>
-          <div class="link-body">
-            <div class="link-title">Telegram</div>
-            <div class="link-desc">! wdie · @gsgojo</div>
-          </div>
-          <div class="link-arrow">→</div>
-        </a>
-
-        <a class="link" href="https://t.me/kzroz" target="_blank" rel="noopener">
-          <div class="link-icon">📢</div>
-          <div class="link-body">
-            <div class="link-title">Telegram-канал</div>
-            <div class="link-desc">@kzroz</div>
-          </div>
-          <div class="link-arrow">→</div>
-        </a>
-
-        <a class="link" href="https://t.me/staticgrams" target="_blank" rel="noopener">
-          <div class="link-icon">⚡</div>
-          <div class="link-body">
-            <div class="link-title">StaticGram</div>
-            <div class="link-desc">@staticgrams</div>
-          </div>
-          <div class="link-arrow">→</div>
-        </a>
-
-        <a class="link" href="https://staticgram.top/chain" target="_blank" rel="noopener">
-          <div class="link-icon">👤</div>
-          <div class="link-body">
-            <div class="link-title">Я в StaticGram</div>
-            <div class="link-desc">Shade · staticgram.top/chain</div>
-          </div>
-          <div class="link-arrow">→</div>
-        </a>
-      </div>
     </div>
 
-    <!-- ПРАВАЯ КОЛОНКА (МУЗЫКА) -->
-    <div class="right-col">
-      <div class="music-card">
-        <div class="music-info">
-          <div class="music-icon">🎵</div>
-          <div>
-            <div class="music-title">Crush X Burnt rice</div>
-            <div class="music-desc">music.mp3</div>
+    <!-- ПРАВАЯ КОЛОНКА -->
+    <div class="col">
+      
+      <!-- Музыка -->
+      <div>
+        <h2>Музыка</h2>
+        <div class="music-card">
+          <div class="music-info">
+            <div class="music-icon">🎵</div>
+            <div>
+              <div class="music-title">Crush X Burnt rice</div>
+              <div class="music-desc">music.mp3</div>
+            </div>
           </div>
+          <audio controls preload="metadata">
+            <source src="music.mp3" type="audio/mpeg">
+          </audio>
         </div>
-        <audio controls preload="metadata">
-          <source src="music.mp3" type="audio/mpeg">
-        </audio>
       </div>
+
+      <!-- Ссылки (под музыкой) -->
+      <div>
+        <h2>Ссылки</h2>
+        <div class="links">
+          <a class="link" href="https://t.me/gsgojo" target="_blank" rel="noopener">
+            <div class="link-icon">✈️</div>
+            <div class="link-body">
+              <div class="link-title">Telegram</div>
+              <div class="link-desc">! wdie · @gsgojo</div>
+            </div>
+            <div class="link-arrow">→</div>
+          </a>
+
+          <a class="link" href="https://t.me/kzroz" target="_blank" rel="noopener">
+            <div class="link-icon">📢</div>
+            <div class="link-body">
+              <div class="link-title">Telegram-канал</div>
+              <div class="link-desc">@kzroz</div>
+            </div>
+            <div class="link-arrow">→</div>
+          </a>
+
+          <a class="link" href="https://t.me/staticgrams" target="_blank" rel="noopener">
+            <div class="link-icon">⚡</div>
+            <div class="link-body">
+              <div class="link-title">StaticGram</div>
+              <div class="link-desc">@staticgrams</div>
+            </div>
+            <div class="link-arrow">→</div>
+          </a>
+
+          <a class="link" href="https://staticgram.top/chain" target="_blank" rel="noopener">
+            <div class="link-icon">👤</div>
+            <div class="link-body">
+              <div class="link-title">Я в StaticGram</div>
+              <div class="link-desc">Shade · staticgram.top/chain</div>
+            </div>
+            <div class="link-arrow">→</div>
+          </a>
+        </div>
+      </div>
+
     </div>
 
   </div>
