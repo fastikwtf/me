@@ -7,179 +7,205 @@
   <meta name="description" content="Рома (Shade) — пользователь StaticGram, разработчик ботов. Музыка, Telegram, StaticGram.">
   <style>
     :root {
-      --bg: #0a0e1a;
-      --card: #131a2b;
-      --card-hover: #1a2338;
-      --text: #e6ebf5;
-      --muted: #8b96ad;
-      --accent: #6c8cff;
-      --accent-2: #a06cff;
-      --border: #1f2a44;
+      --bg: #000000;
+      --card: rgba(20, 20, 25, 0.7);
+      --card-hover: rgba(40, 40, 45, 0.9);
+      --text: #ffffff;
+      --muted: #888888;
+      --accent: #ffffff;
+      --border: #333333;
     }
+    
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-      background: radial-gradient(1200px 600px at 50% -10%, #1a2440 0%, var(--bg) 60%);
+      /* Градиент черный - серый - черный */
+      background: linear-gradient(135deg, #000000 0%, #2a2a2a 50%, #000000 100%);
       color: var(--text);
-      min-height: 100vh;
+      height: 100vh;
       display: flex;
       justify-content: center;
-      padding: 2rem 1rem;
+      align-items: center;
+      overflow: hidden; /* Запрет на прокрутку */
     }
-    .container { width: 100%; max-width: 640px; }
 
-    /* Header */
-    header { text-align: center; margin-bottom: 2.5rem; }
+    .container {
+      width: 100%;
+      max-width: 900px;
+      padding: 2rem;
+      display: flex;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    /* Левая колонка (Аватарка) */
+    .left-col {
+      flex-shrink: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
     .avatar {
-      width: 96px; height: 96px;
+      width: 280px;
+      height: 280px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2.2rem; font-weight: 700;
-      margin: 0 auto 1rem;
-      box-shadow: 0 8px 30px rgba(108,140,255,.35);
+      object-fit: cover;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
     }
-    h1 { font-size: 2rem; font-weight: 700; letter-spacing: -.02em; }
-    .subtitle { color: var(--muted); margin-top: .35rem; font-size: .95rem; }
 
-    /* About card */
-    .about {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.25rem 1.5rem;
-      margin-bottom: 2rem;
+    /* Правая колонка (Инфа, Музыка, Ссылки) */
+    .right-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      min-width: 0;
     }
-    .about h2,
-    section h2 {
-      font-size: .8rem;
-      text-transform: uppercase;
-      letter-spacing: .12em;
-      color: var(--muted);
-      margin-bottom: 1rem;
-      font-weight: 600;
-    }
+
+    /* Заголовки */
+    h1 { font-size: 2.5rem; font-weight: 700; letter-spacing: -.02em; }
+    .subtitle { color: var(--muted); font-size: 1.1rem; margin-top: 0.2rem; }
+
+    /* Обо мне */
     .about-row {
       display: flex;
       justify-content: space-between;
-      padding: .55rem 0;
+      padding: .4rem 0;
       border-bottom: 1px solid var(--border);
       font-size: .95rem;
     }
     .about-row:last-child { border-bottom: none; }
     .about-row span:first-child { color: var(--muted); }
-    .about-row span:last-child { font-weight: 500; }
+    .about-row span:last-child { font-weight: 500; text-align: right; }
 
-    /* Sections */
-    section { margin-bottom: 2rem; }
-
-    /* Music */
+    /* Музыка */
     .music-card {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 1rem 1.25rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
+      border-radius: 12px;
+      padding: 1rem;
+      backdrop-filter: blur(10px);
     }
     .music-info {
       display: flex;
       align-items: center;
       gap: 1rem;
+      margin-bottom: 0.8rem;
     }
-    .music-card audio {
+    .music-icon {
+      width: 36px; height: 36px;
+      background: #ffffff;
+      color: #000;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .music-title { font-weight: 600; font-size: 1rem; }
+    .music-desc { color: var(--muted); font-size: .8rem; }
+    
+    /* Темный плеер */
+    audio {
       width: 100%;
       height: 40px;
       outline: none;
+      border-radius: 8px;
+      /* Инвертируем цвета стандартного плеера, чтобы он стал черным */
+      filter: invert(100%) hue-rotate(180deg) brightness(1.5);
     }
 
-    /* Links */
-    .links { display: flex; flex-direction: column; gap: .75rem; }
+    /* Ссылки */
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
     .link {
       display: flex;
       align-items: center;
       gap: 1rem;
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 1rem 1.25rem;
+      border-radius: 12px;
+      padding: 0.8rem 1rem;
       text-decoration: none;
       color: var(--text);
       transition: all .2s ease;
+      backdrop-filter: blur(10px);
     }
     .link:hover {
       background: var(--card-hover);
-      border-color: var(--accent);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(108,140,255,.15);
+      border-color: #555;
+      transform: translateX(4px);
     }
     .link-icon {
-      width: 40px; height: 40px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.1);
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem;
+      font-size: 1rem;
       flex-shrink: 0;
     }
     .link-body { flex: 1; min-width: 0; }
-    .link-title { font-weight: 600; font-size: 1rem; }
-    .link-desc {
-      color: var(--muted);
-      font-size: .85rem;
-      margin-top: .15rem;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .link-arrow { color: var(--muted); font-size: 1.2rem; }
+    .link-title { font-weight: 600; font-size: 0.95rem; }
+    .link-desc { color: var(--muted); font-size: .8rem; margin-top: 0.1rem; }
+    .link-arrow { color: var(--muted); }
 
-    footer {
-      text-align: center;
-      color: var(--muted);
-      font-size: .8rem;
-      margin-top: 3rem;
+    /* Адаптивность для телефонов (если кто-то зайдет с мобилки) */
+    @media (max-width: 768px) {
+      body { overflow: auto; height: auto; padding: 2rem 0; }
+      .container { flex-direction: column; gap: 2rem; padding: 1rem; }
+      .avatar { width: 200px; height: 200px; }
+      .right-col { width: 100%; }
+      h1 { font-size: 2rem; text-align: center; }
+      .subtitle { text-align: center; }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <header>
-      <div class="avatar">S</div>
-      <h1>Рома</h1>
-      <p class="subtitle">Пользователь StaticGram · Shade</p>
-    </header>
-
-    <div class="about">
-      <h2>Обо мне</h2>
-      <div class="about-row"><span>Имя</span><span>Рома</span></div>
-      <div class="about-row"><span>Возраст</span><span>??</span></div>
-      <div class="about-row"><span>Занятие</span><span>Разработчик ботов</span></div>
-      <div class="about-row"><span>В Telegram</span><span>! wdie</span></div>
-      <div class="about-row"><span>В StaticGram</span><span>Shade</span></div>
+    
+    <!-- Левая часть: Аватарка -->
+    <div class="left-col">
+      <!-- Не забудь закинуть файл avatar.jpg в репозиторий! -->
+      <img class="avatar" src="avatar.jpg" alt="Аватарка">
     </div>
 
-    <!-- Музыка -->
-    <section>
-      <h2>Музыка</h2>
+    <!-- Правая часть: Инфа, Музыка, Ссылки -->
+    <div class="right-col">
+      
+      <!-- Инфа -->
+      <div>
+        <h1>Рома</h1>
+        <p class="subtitle">Пользователь StaticGram · Shade</p>
+      </div>
+
+      <div>
+        <div class="about-row"><span>Имя</span><span>Рома</span></div>
+        <div class="about-row"><span>Возраст</span><span>??</span></div>
+        <div class="about-row"><span>Занятие</span><span>Разработчик ботов</span></div>
+        <div class="about-row"><span>В Telegram</span><span>! wdie</span></div>
+        <div class="about-row"><span>В StaticGram</span><span>Shade</span></div>
+      </div>
+
+      <!-- Музыка -->
       <div class="music-card">
         <div class="music-info">
-          <div class="link-icon">🎵</div>
-          <div class="link-body">
-            <div class="link-title">Crush X Burnt rice</div>
-            <div class="link-desc">music.mp3</div>
+          <div class="music-icon">🎵</div>
+          <div>
+            <div class="music-title">Crush X Burnt rice</div>
+            <div class="music-desc">music.mp3</div>
           </div>
         </div>
         <audio controls preload="metadata">
           <source src="music.mp3" type="audio/mpeg">
-          Ваш браузер не поддерживает аудио.
         </audio>
       </div>
-    </section>
 
-    <!-- Ссылки -->
-    <section>
-      <h2>Ссылки</h2>
+      <!-- Ссылки -->
       <div class="links">
         <a class="link" href="https://t.me/gsgojo" target="_blank" rel="noopener">
           <div class="link-icon">✈️</div>
@@ -217,12 +243,8 @@
           <div class="link-arrow">→</div>
         </a>
       </div>
-    </section>
 
-    <footer>
-      © <span id="year"></span> Рома · Сделано на GitHub Pages
-    </footer>
+    </div>
   </div>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
