@@ -33,7 +33,7 @@
       max-width: 1000px;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 3rem; /* Чуть уменьшил расстояние между колонками */
+      gap: 3rem;
       padding: 2rem;
     }
 
@@ -41,7 +41,7 @@
     .col {
       display: flex;
       flex-direction: column;
-      gap: 1.2rem; /* Компактнее */
+      gap: 1.2rem;
     }
 
     /* Заголовки секций */
@@ -55,7 +55,7 @@
       margin-bottom: 0.4rem;
     }
 
-    /* --- ОБО МНЕ --- */
+    /* --- ЛЕВАЯ КОЛОНКА: ОБО МНЕ --- */
     h1 {
       font-size: 1.8rem;
       font-weight: 700;
@@ -79,7 +79,7 @@
     .about-row span:first-child { color: var(--muted); }
     .about-row span:last-child { font-weight: 500; text-align: right; }
 
-    /* --- МУЗЫКА --- */
+    /* --- ЛЕВАЯ КОЛОНКА: МУЗЫКА --- */
     .music-card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -111,30 +111,7 @@
       display: block;
     }
 
-    /* --- МОИ БОТЫ --- */
-    .bots-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-      margin-top: 0.5rem;
-    }
-    .bot-item {
-      color: var(--text);
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-family: monospace;
-      padding: 0.3rem 0.6rem;
-      border-radius: 6px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid transparent;
-      transition: all 0.2s ease;
-    }
-    .bot-item:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: var(--border);
-    }
-
-    /* --- ССЫЛКИ --- */
+    /* --- ПРАВАЯ КОЛОНКА: ССЫЛКИ --- */
     .links {
       display: flex;
       flex-direction: column;
@@ -171,6 +148,30 @@
     .link-desc { color: var(--muted); font-size: .75rem; margin-top: 0.1rem; }
     .link-arrow { color: var(--muted); font-size: 1rem; }
 
+    /* --- ПРАВАЯ КОЛОНКА: МОИ БОТЫ --- */
+    .bots-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr; /* В два столбца, чтобы не растягивать вниз */
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .bot-item {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-family: monospace;
+      padding: 0.5rem;
+      border-radius: 6px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+    .bot-item:hover {
+      background: var(--card-hover);
+      border-color: #444;
+    }
+
     /* Адаптив под мобилки */
     @media (max-width: 768px) {
       body { overflow: auto; height: auto; }
@@ -178,6 +179,9 @@
         grid-template-columns: 1fr;
         gap: 2rem;
         padding: 1.5rem 1rem;
+      }
+      .bots-list {
+        grid-template-columns: 1fr; /* На мобилках в один столбец */
       }
     }
   </style>
@@ -216,21 +220,11 @@
           </audio>
         </div>
       </div>
-
-      <!-- Мои боты -->
-      <div>
-        <h2>Мои боты</h2>
-        <div class="bots-list">
-          <a href="https://t.me/giveawaybot" target="_blank" rel="noopener" class="bot-item">@giveawaybot</a>
-          <a href="https://t.me/guardbot" target="_blank" rel="noopener" class="bot-item">@guardbot</a>
-          <a href="https://t.me/donatikibot" target="_blank" rel="noopener" class="bot-item">@donatikibot</a>
-          <a href="https://t.me/casinokonabot" target="_blank" rel="noopener" class="bot-item">@casinokonabot</a>
-        </div>
-      </div>
     </div>
 
     <!-- ПРАВАЯ КОЛОНКА -->
     <div class="col">
+      <!-- Ссылки -->
       <div>
         <h2>Ссылки</h2>
         <div class="links">
@@ -269,6 +263,17 @@
             </div>
             <div class="link-arrow">→</div>
           </a>
+        </div>
+      </div>
+
+      <!-- Мои боты -->
+      <div>
+        <h2>Мои боты</h2>
+        <div class="bots-list">
+          <a href="https://t.me/giveawaybot" target="_blank" rel="noopener" class="bot-item">@giveawaybot</a>
+          <a href="https://t.me/guardbot" target="_blank" rel="noopener" class="bot-item">@guardbot</a>
+          <a href="https://t.me/donatikibot" target="_blank" rel="noopener" class="bot-item">@donatikibot</a>
+          <a href="https://t.me/casinokonabot" target="_blank" rel="noopener" class="bot-item">@casinokonabot</a>
         </div>
       </div>
     </div>
